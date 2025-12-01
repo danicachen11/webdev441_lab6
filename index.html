@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunrise & Sunset Dashboard</title>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+<header>
+    <h1>Sunrise & Sunset Dashboard</h1>
+</header>
+
+<main>
+
+    <!-- ===== LOCATION INPUT SECTION ===== -->
+    <section id="location-controls">
+        <h2>Select a Location</h2>
+
+        <!-- Dropdown with 10+ preset locations -->
+        <label for="locationSelect">Choose a city:</label>
+        <select id="locationSelect">
+            <option value="">-- Select a location --</option>
+            <option data-lat="41.8781" data-lng="-87.6298">Chicago, IL</option>
+            <option data-lat="34.0522" data-lng="-118.2437">Los Angeles, CA</option>
+            <option data-lat="40.7128" data-lng="-74.0060">New York, NY</option>
+            <option data-lat="47.6062" data-lng="-122.3321">Seattle, WA</option>
+            <option data-lat="25.7617" data-lng="-80.1918">Miami, FL</option>
+            <option data-lat="51.5074" data-lng="-0.1278">London, UK</option>
+            <option data-lat="48.8566" data-lng="2.3522">Paris, France</option>
+            <option data-lat="35.6895" data-lng="139.6917">Tokyo, Japan</option>
+            <option data-lat="-33.8688" data-lng="151.2093">Sydney, Australia</option>
+            <option data-lat="55.7558" data-lng="37.6173">Moscow, Russia</option>
+        </select>
+
+        <button id="loadLocationBtn">Get Data</button>
+    </section>
+
+
+    <!-- ===== RESULTS SECTION ===== -->
+    <section id="results">
+        <h2>Sun Data</h2>
+
+        <!-- Placeholder shown before search -->
+        <p id="placeholder">Please select a location above.</p>
+
+        <div id="resultsGrid" class="hidden">
+
+            <!-- TODAY -->
+            <div class="day-block">
+                <h3>Today</h3>
+                <p><strong>Sunrise:</strong> <span id="today-sunrise">--</span></p>
+                <p><strong>Sunset:</strong> <span id="today-sunset">--</span></p>
+                <p><strong>Dawn:</strong> <span id="today-dawn">--</span></p>
+                <p><strong>Dusk:</strong> <span id="today-dusk">--</span></p>
+                <p><strong>Solar Noon:</strong> <span id="today-solarnoon">--</span></p>
+                <p><strong>Day Length:</strong> <span id="today-daylength">--</span></p>
+                <p><strong>Time Zone:</strong> <span id="today-timezone">--</span></p>
+            </div>
+
+            <!-- TOMORROW -->
+            <div class="day-block">
+                <h3>Tomorrow</h3>
+                <p><strong>Sunrise:</strong> <span id="tomorrow-sunrise">--</span></p>
+                <p><strong>Sunset:</strong> <span id="tomorrow-sunset">--</span></p>
+                <p><strong>Dawn:</strong> <span id="tomorrow-dawn">--</span></p>
+                <p><strong>Dusk:</strong> <span id="tomorrow-dusk">--</span></p>
+                <p><strong>Solar Noon:</strong> <span id="tomorrow-solarnoon">--</span></p>
+                <p><strong>Day Length:</strong> <span id="tomorrow-daylength">--</span></p>
+                <p><strong>Time Zone:</strong> <span id="tomorrow-timezone">--</span></p>
+            </div>
+
+        </div>
+
+        <!-- Error message area -->
+        <p id="errorMsg" class="error hidden"></p>
+    </section>
+
+</main>
+
+<footer>
+    <p>Data provided by <a href="https://sunrisesunset.io/api/" target="_blank">SunriseSunset.io API</a></p>
+</footer>
+
+<!-- External JS -->
+<script src="app.js"></script>
+
+</body>
+</html>
