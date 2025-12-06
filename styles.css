@@ -1,0 +1,248 @@
+/* ------------------------------
+   Base Styles
+------------------------------ */
+:root {
+  --bg: #f9fafb;
+  --card-bg: #ffffff;
+  --text: #222;
+  --text-muted: #666;
+  --accent: #0066ff;
+  --border: #ddd;
+  --radius: 12px;
+  --shadow: 0 3px 6px rgba(0,0,0,0.08);
+  --max-width: 900px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* ------------------------------
+   Header
+------------------------------ */
+.site-header {
+  background: var(--card-bg);
+  box-shadow: var(--shadow);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header h1 {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.subtitle {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* ------------------------------
+   Controls
+------------------------------ */
+.controls {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+label {
+  font-weight: 600;
+  display: block;
+  margin-bottom: 0.3rem;
+}
+
+select {
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  margin-bottom: 1rem;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0,102,255,0.2);
+}
+
+button {
+  padding: 0.55rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: 0.15s ease, transform 0.15s ease;
+}
+
+#get-data-btn {
+  background: var(--accent);
+  color: white;
+}
+
+#get-data-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+#clear-btn {
+  background: #e5e7eb;
+  margin-left: 0.5rem;
+}
+
+#clear-btn:hover {
+  background: #d8dadf;
+  transform: translateY(-1px);
+}
+
+/* ------------------------------
+   Dashboard
+------------------------------ */
+#dashboard {
+  margin-top: 2rem;
+}
+
+.location-info {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.card {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.data-list {
+  margin-top: 1rem;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--border);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.data-row:hover {
+  background-color: #f3f4f6;
+  border-bottom-color: #ccc;
+}
+
+.data-row dt {
+  font-weight: 600;
+}
+
+.data-row dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+/* ------------------------------
+   Status Panel
+------------------------------ */
+#status-panel {
+  background: var(--card-bg);
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+#status-panel:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+#error-message {
+  background: #ffe6e6;
+  color: #b30000;
+  border-left: 4px solid #b30000;
+  padding: 0.75rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+/* ------------------------------
+   Footer
+------------------------------ */
+.site-footer {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  background: var(--card-bg);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ------------------------------
+   Responsive
+------------------------------ */
+@media (max-width: 700px) {
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  button {
+    width: 100%;
+    margin: 0.4rem 0;
+  }
+
+  .form-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

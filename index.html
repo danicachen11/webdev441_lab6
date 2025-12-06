@@ -1,92 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sunrise & Sunset Dashboard</title>
-
-    <!-- External CSS -->
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sunrise & Sunset Dashboard — ITMD 441 Lab 6</title>
+  <meta name="description" content="Dashboard to display sunrise, sunset, dawn, dusk, day length, and solar noon for selected locations. Built for ITMD 441 Lab 6." />
+  <!-- External CSS (create styles.css) -->
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-<header>
-    <h1>Sunrise & Sunset Dashboard</h1>
-</header>
+  <header class="site-header">
+    <div class="container">
+      <h1>Sunrise & Sunset Dashboard</h1>
+      <p class="subtitle">Pick a location to view sunrise, sunset, dawn, dusk, day length, and solar noon for today & tomorrow).</p>
+    </div>
+  </header>
 
-<main>
+  <main class="container" id="main" role="main">
+    <!-- Controls -->
+    <section class="controls" aria-labelledby="controls-heading">
+      <h2 id="controls-heading">Choose Your Location</h2>
 
-    <!-- ===== LOCATION INPUT SECTION ===== -->
-    <section id="location-controls">
-        <h2>Select a Location</h2>
+      <form id="location-form" aria-describedby="controls-desc">
+        <p id="controls-desc">Select from the list below and click <strong>Get Data</strong> to get your data or <strong>Clear</strong> to clear currently displayed data.</p>
 
-        <!-- Dropdown with 10+ preset locations -->
-        <label for="locationSelect">Choose a city:</label>
-        <select id="locationSelect">
-            <option value="">-- Select a location --</option>
-            <option data-lat="41.8781" data-lng="-87.6298">Chicago, IL</option>
-            <option data-lat="34.0522" data-lng="-118.2437">Los Angeles, CA</option>
-            <option data-lat="40.7128" data-lng="-74.0060">New York, NY</option>
-            <option data-lat="47.6062" data-lng="-122.3321">Seattle, WA</option>
-            <option data-lat="25.7617" data-lng="-80.1918">Miami, FL</option>
-            <option data-lat="51.5074" data-lng="-0.1278">London, UK</option>
-            <option data-lat="48.8566" data-lng="2.3522">Paris, France</option>
-            <option data-lat="35.6895" data-lng="139.6917">Tokyo, Japan</option>
-            <option data-lat="-33.8688" data-lng="151.2093">Sydney, Australia</option>
-            <option data-lat="55.7558" data-lng="37.6173">Moscow, Russia</option>
+        <label for="preset-locations">Preset Locations (select one)</label>
+        <!-- Dropdown menu of 10 locations w/ coordinates from sunrisesunset.io -->
+        <select id="preset-locations" name="preset" aria-label="Preset locations">
+          <option value="" disabled selected>— Select a location —</option>
+          <option value="chicago" data-lat="41.85003" data-lon="-87.65005">Chicago, IL, USA</option>
+          <option value="newyork" data-lat="40.71427" data-lon="-74.00597">New York, NY, USA</option>
+          <option value="tokyo" data-lat="35.6895" data-lon="139.69171">Tokyo, Japan</option>
+          <option value="miami" data-lat="25.77427" data-lon="-80.19366">Miami, FL, USA</option>
+          <option value="losangeles" data-lat="34.0522" data-lon="-118.2437">Los Angeles, CA, USA</option>
+          <option value="denver" data-lat="39.7392" data-lon="-104.9903">Denver, CO, USA</option>
+          <option value="seattle" data-lat="47.6062" data-lon="-122.3321">Seattle, WA, USA</option>
+          <option value="boston" data-lat="42.3601" data-lon="-71.0589">Boston, MA, USA</option>
+          <option value="phoenix" data-lat="33.4484" data-lon="-112.0740">Phoenix, AZ, USA</option>
+          <option value="london" data-lat="51.5074" data-lon="-0.1278">London, UK</option>
         </select>
-
-        <button id="loadLocationBtn">Get Data</button>
-    </section>
-
-
-    <!-- ===== RESULTS SECTION ===== -->
-    <section id="results">
-        <h2>Sun Data</h2>
-
-        <!-- Placeholder shown before search -->
-        <p id="placeholder">Please select a location above.</p>
-
-        <div id="resultsGrid" class="hidden">
-
-            <!-- TODAY -->
-            <div class="day-block">
-                <h3>Today</h3>
-                <p><strong>Sunrise:</strong> <span id="today-sunrise">--</span></p>
-                <p><strong>Sunset:</strong> <span id="today-sunset">--</span></p>
-                <p><strong>Dawn:</strong> <span id="today-dawn">--</span></p>
-                <p><strong>Dusk:</strong> <span id="today-dusk">--</span></p>
-                <p><strong>Solar Noon:</strong> <span id="today-solarnoon">--</span></p>
-                <p><strong>Day Length:</strong> <span id="today-daylength">--</span></p>
-                <p><strong>Time Zone:</strong> <span id="today-timezone">--</span></p>
-            </div>
-
-            <!-- TOMORROW -->
-            <div class="day-block">
-                <h3>Tomorrow</h3>
-                <p><strong>Sunrise:</strong> <span id="tomorrow-sunrise">--</span></p>
-                <p><strong>Sunset:</strong> <span id="tomorrow-sunset">--</span></p>
-                <p><strong>Dawn:</strong> <span id="tomorrow-dawn">--</span></p>
-                <p><strong>Dusk:</strong> <span id="tomorrow-dusk">--</span></p>
-                <p><strong>Solar Noon:</strong> <span id="tomorrow-solarnoon">--</span></p>
-                <p><strong>Day Length:</strong> <span id="tomorrow-daylength">--</span></p>
-                <p><strong>Time Zone:</strong> <span id="tomorrow-timezone">--</span></p>
-            </div>
-
+				<!-- buttons to click -->
+        <div class="form-actions">
+          <button type="submit" id="get-data-btn">Get Data</button>
+          <button type="button" id="clear-btn" aria-label="Clear results">Clear</button>
         </div>
 
-        <!-- Error message area -->
-        <p id="errorMsg" class="error hidden"></p>
+        <!-- Inline error message -->
+        <p id="form-error" class="error-text hidden" role="alert" aria-live="assertive"></p>
+      </form>
     </section>
 
-</main>
 
-<footer>
-    <p>Data provided by <a href="https://sunrisesunset.io/api/" target="_blank">SunriseSunset.io API</a></p>
-</footer>
+    <section id="dashboard" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">Dashboard</h2>
+      <!-- Info banner for selected location & timezone -->
+      <div id="location-info" class="location-info" aria-live="polite">
+  			<p id="location-text" class="muted">No location selected. Choose a location and press <strong>Get Data</strong>.</p>
+			</div>
 
-<!-- External JS -->
-<script src="app.js"></script>
+      <!-- Result grid with 2 cards for today and tomorrow result display-->
+      <div class="results-grid" role="region" aria-label="Sunrise and sunset results">
+        <!-- today card result display -->
+        <article class="card" id="today-card" aria-labelledby="today-title">
+          <h3 id="today-title">Today — <span id="today-date">—</span></h3>
+          <dl class="data-list">
+            <div class="data-row"><dt>Sunrise</dt><dd id="today-sunrise">—</dd></div>
+            <div class="data-row"><dt>Sunset</dt><dd id="today-sunset">—</dd></div>
+            <div class="data-row"><dt>Dawn</dt><dd id="today-dawn">—</dd></div>
+            <div class="data-row"><dt>Dusk</dt><dd id="today-dusk">—</dd></div>
+            <div class="data-row"><dt>Day length</dt><dd id="today-daylength">—</dd></div>
+            <div class="data-row"><dt>Solar noon</dt><dd id="today-noon">—</dd></div>
+            <div class="data-row"><dt>Time zone</dt><dd id="today-tz">—</dd></div>
+          </dl>
+        </article>
+        <!-- tomorrow card display -->
+        <article class="card" id="tomorrow-card" aria-labelledby="tomorrow-title">
+          <h3 id="tomorrow-title">Tomorrow — <span id="tomorrow-date">—</span></h3>
+          <dl class="data-list">
+            <div class="data-row"><dt>Sunrise</dt><dd id="tomorrow-sunrise">—</dd></div>
+            <div class="data-row"><dt>Sunset</dt><dd id="tomorrow-sunset">—</dd></div>
+            <div class="data-row"><dt>Dawn</dt><dd id="tomorrow-dawn">—</dd></div>
+            <div class="data-row"><dt>Dusk</dt><dd id="tomorrow-dusk">—</dd></div>
+            <div class="data-row"><dt>Day length</dt><dd id="tomorrow-daylength">—</dd></div>
+            <div class="data-row"><dt>Solar noon</dt><dd id="tomorrow-noon">—</dd></div>
+            <div class="data-row"><dt>Time zone</dt><dd id="tomorrow-tz">—</dd></div>
+          </dl>
+        </article>
+      </div>
+    </section>
+  </main>
 
+  <footer class="site-footer">
+    <div class="container">
+      <p>Data provided by <a href="https://sunrisesunset.io/" target="_blank" rel="noopener noreferrer">SunriseSunset.io</a>. See API documentation for example requests.</p>
+      <p class="muted">ITMD 441 — Lab 6</p>
+    </div>
+  </footer>
+
+  <!-- External JS (create app.js) -->
+  <script src="script.js" defer></script>
 </body>
 </html>
